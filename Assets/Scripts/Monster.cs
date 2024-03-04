@@ -3,31 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public abstract class Monster : MonoBehaviour
 {
-
-    public float moveSpeed = 2.0f;
+    public float moveSpeed = 5.0f;
     public Rigidbody2D targetRigidbody;
-    float detectRange = 5.0f;
-    float attackRange = 2.0f;
+    protected float detectRange = 5.0f;
+    protected float attackRange = 2.0f;
 
-    float previousPositionX;
+    protected float previousPositionX;
 
-    Rigidbody2D myRigidbody;
-    SpriteRenderer mySpriter;
-    Animator myAnimator;
+    protected Rigidbody2D myRigidbody;
+    protected SpriteRenderer mySpriter;
+    protected Animator myAnimator;
 
     //bool isAlive = true;
-    bool isMoving = false;
+    protected bool isMoving = false;
 
-    Vector2 originPosition;
-    BehaviorTreeRunner BTRunner = null;
+    protected Vector2 originPosition;
+    protected BehaviorTreeRunner BTRunner = null;
 
     void Awake() {
         myRigidbody = GetComponent<Rigidbody2D>();
         mySpriter = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
-
+        
         originPosition = transform.position;
         BTRunner = new BehaviorTreeRunner(SettingBT());
 
@@ -35,18 +34,16 @@ public class Monster : MonoBehaviour
     }
 
     void FixedUpdate() {
-        SetVelocityToZero();
         BTRunner.Operate();
         FlipSprite();
         SetMovingAnimation();
         SetPreviousPositionX();
     }
 
+    abstract protected INode SettingBT();
+
     void SetVelocityToZero() {
         myRigidbody.velocity = Vector2.zero;
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
     }
 
     void SetPreviousPositionX() {
@@ -62,26 +59,14 @@ public class Monster : MonoBehaviour
         }
     }
 
-    INode SettingBT() {
-        return new SelectorNode
-        (
-            new List<INode>() { 
-                new SequenceNode
-                    (new List<INode>() { new ActionNode(CheckMeleeAttacking), new ActionNode(CheckEnemyWithinAttackRange), new ActionNode(DoMeleeAttack) } ),
-                new SequenceNode 
-                    (new List<INode>() { new ActionNode(CheckEnemyWithinDetectRange), new ActionNode(MoveToEnemy) } ),
-                new ActionNode(MoveToOriginalPosition)
-            }
-        );
-    }
 
     void FlipSprite() {
         float currentPositionX = transform.position.x;
         if (Mathf.Abs(currentPositionX - previousPositionX) > float.Epsilon) {
-            mySpriter.flipX = previousPositionX < currentPositionX;
+            mySpriter.flipX = previousPositionX > currentPositionX;
         }
     }
-    bool IsAnimationRunning(string stateName)
+    protected bool IsAnimationRunning(string stateName)
     {
         if(myAnimator != null)
         {
@@ -95,35 +80,22 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    INode.ENodeState CheckMeleeAttacking()
-    {
-        if (IsAnimationRunning("attack")) {
-            return INode.ENodeState.ENS_Running;
-        }
-
-        return INode.ENodeState.ENS_Success;
-    }
-
-    INode.ENodeState DoMeleeAttack() {
-        myAnimator.SetTrigger("attack");
-        return INode.ENodeState.ENS_Success;
-    }
-
-    INode.ENodeState CheckEnemyWithinAttackRange() {
+    protected INode.ENodeState CheckEnemyWithinAttackRange() {
         if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < attackRange * attackRange) {
+            SetVelocityToZero();
             return INode.ENodeState.ENS_Success;
         }
         return INode.ENodeState.ENS_Failure;
     }
 
-    INode.ENodeState CheckEnemyWithinDetectRange() {
+    protected INode.ENodeState CheckEnemyWithinDetectRange() {
         if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < detectRange * detectRange) {
             return INode.ENodeState.ENS_Success;
         }
         return INode.ENodeState.ENS_Failure;
     }
 
-    INode.ENodeState MoveToEnemy() {
+    protected INode.ENodeState MoveToEnemy() {
         Vector2 currentPosition = transform.position;
 
         if (Vector2.SqrMagnitude(currentPosition - targetRigidbody.position) < attackRange * attackRange) {
@@ -131,34 +103,32 @@ public class Monster : MonoBehaviour
         }
 
         Vector2 dir = targetRigidbody.position - myRigidbody.position;
-        dir = moveSpeed * Time.fixedDeltaTime * dir.normalized;
-        myRigidbody.MovePosition(myRigidbody.position + dir);
+        myRigidbody.velocity = moveSpeed * dir.normalized;
 
         return INode.ENodeState.ENS_Running;
     }
 
-    INode.ENodeState MoveToOriginalPosition() {
+    protected INode.ENodeState MoveToOriginalPosition() {
         Vector2 currentPosition = transform.position;
 
         if (Vector2.SqrMagnitude(originPosition - currentPosition) < 0.01f) {
             myAnimator.ResetTrigger("attack");
+            SetVelocityToZero();
             return INode.ENodeState.ENS_Success;
         }
 
         Vector2 dir = originPosition - myRigidbody.position;
-
-        dir = moveSpeed * Time.fixedDeltaTime * dir.normalized;
-        myRigidbody.MovePosition(myRigidbody.position + dir);
+        myRigidbody.velocity = moveSpeed * dir.normalized;
 
         return INode.ENodeState.ENS_Running;
     }
 
-    private void OnDrawGizmos()
-    {
+    private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(this.transform.position, detectRange);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(this.transform.position, attackRange);
     }
+
 }

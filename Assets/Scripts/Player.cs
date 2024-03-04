@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     void FlipSprite() {
         if (inputVec.x != 0) {
-            mySpriter.flipX = inputVec.x > 0;
+            mySpriter.flipX = inputVec.x < 0;
         }
     }
 
