@@ -5,12 +5,13 @@ using UnityEngine;
 public class Skull : Monster {
     private bool isEvasionTurn = false;
     
-    //private float evadeSpeed = 10.0f;
+    private float evadeSpeed = 7.0f;
     private float attackDuration;
     private float evadeDuration;
 
     private void Start() {
-        attackRange = 5.0f;
+        detectRange = 20.0f;
+        attackRange = 10.0f;
 
         RuntimeAnimatorController ac = myAnimator.runtimeAnimatorController;
 
@@ -88,9 +89,15 @@ public class Skull : Monster {
     }
 
     IEnumerator Evade() {
-        Vector2 dir = targetRigidbody.position - myRigidbody.position;
+        float flag = UnityEngine.Random.Range(0.0f, 1.0f);
 
-        myRigidbody.velocity = -moveSpeed * dir.normalized;
+        float theta = flag > 0.5f ? 1.0f : -1.0f;
+        theta *= 60.0f;
+        
+        Vector2 dir = targetRigidbody.position - myRigidbody.position;
+        Vector2 direction = Quaternion.AngleAxis(theta, Vector3.forward) * dir.normalized;
+
+        myRigidbody.velocity = evadeSpeed * direction.normalized;
 
         yield return new WaitForSeconds(evadeDuration);
         isEvasionTurn = false;
