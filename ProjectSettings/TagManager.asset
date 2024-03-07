@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Floor
   - Wall
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3001836347
+    locked: 0
+  - name: Bullet
+    uniqueID: 1599211755
     locked: 0

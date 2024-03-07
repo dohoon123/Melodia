@@ -10,19 +10,19 @@ public class Skull : Monster {
     private float evadeDuration;
 
     private void Start() {
-        detectRange = 20.0f;
-        attackRange = 10.0f;
+        detectRange = 10.0f;
+        attackRange = 5.0f;
 
         RuntimeAnimatorController ac = myAnimator.runtimeAnimatorController;
 
         foreach (AnimationClip clip in ac.animationClips) {
             if (clip.name == "Skull_Attack") {
-                Debug.Log("Skull_Attack exist!");
+                Debug.Log(clip.length);
                 attackDuration = clip.length;
             }
             
             if (clip.name == "Skull_Evade") {
-                Debug.Log("Skull_Evade exist!");
+                Debug.Log(clip.length);
                 evadeDuration = clip.length;
             }
         }
@@ -40,7 +40,7 @@ public class Skull : Monster {
                             (new List<INode>() { new ActionNode(CheckEvading), new ActionNode(DoEvasion) } ),
                     } ),
                 new SequenceNode 
-                    (new List<INode>() { new ActionNode(CheckEnemyWithinDetectRange), new ActionNode(MoveToEnemy) } ),
+                    (new List<INode>() { new ActionNode(CheckEnemyWithinDetectRange), new InverterNode(new ActionNode(CheckEnemyWithinAttackRange)), new ActionNode(MoveToEnemy) } ),
                 new ActionNode(MoveToOriginalPosition)
             }
         );
@@ -76,6 +76,7 @@ public class Skull : Monster {
     }
 
     INode.ENodeState DoRangeAttack() {
+        Debug.Log("do range attack");
         myAnimator.SetTrigger("attack");
 
         StartCoroutine(Attack());
@@ -83,8 +84,14 @@ public class Skull : Monster {
     }
 
     IEnumerator Attack() {
-        // do sth
+        GameObject bullet = GameManager.instance.pool.Get(0);
+        SkullBullet sb = bullet.GetComponent<SkullBullet>();
+        sb.Set(transform.position);
+
+        SetVelocityToZero();
+
         yield return new WaitForSeconds(attackDuration);
+        myAnimator.SetTrigger("idle");
         isEvasionTurn = true;
     }
 
@@ -100,6 +107,9 @@ public class Skull : Monster {
         myRigidbody.velocity = evadeSpeed * direction.normalized;
 
         yield return new WaitForSeconds(evadeDuration);
+
+        myAnimator.SetTrigger("idle");
+        SetVelocityToZero();
         isEvasionTurn = false;
     }
 }

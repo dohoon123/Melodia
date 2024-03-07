@@ -20,7 +20,6 @@ public class SelectorNode : INode {
                     return INode.ENodeState.ENS_Success;
             }
         }
-
         return INode.ENodeState.ENS_Failure; 
     }
 }

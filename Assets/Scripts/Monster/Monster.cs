@@ -42,7 +42,7 @@ public abstract class Monster : MonoBehaviour
 
     abstract protected INode SettingBT();
 
-    void SetVelocityToZero() {
+    protected void SetVelocityToZero() {
         myRigidbody.velocity = Vector2.zero;
     }
 
@@ -82,7 +82,6 @@ public abstract class Monster : MonoBehaviour
 
     protected INode.ENodeState CheckEnemyWithinAttackRange() {
         if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < attackRange * attackRange) {
-            SetVelocityToZero();
             return INode.ENodeState.ENS_Success;
         }
         return INode.ENodeState.ENS_Failure;
