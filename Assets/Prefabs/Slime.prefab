@@ -158,5 +158,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5049a1081e457f949bee027853b53b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
-  targetRigidbody: {fileID: 0}
+  monsterData: {fileID: 11400000, guid: 525e5d280a352264293705c4a69110bb, type: 2}
+  targetRigidbody: {fileID: 4578571476181966636, guid: fb395b27fdc7124409ee41d1a9eda728, type: 3}

@@ -8,7 +8,6 @@ public class SkullBullet : MonoBehaviour
     Rigidbody2D myRigidbody;
     Vector2 direction;
 
-    //int damage = 10;
     float speed = 10.0f;
 
     Collider2D myCollider;
@@ -30,9 +29,5 @@ public class SkullBullet : MonoBehaviour
 
     void Shoot() {
         myRigidbody.velocity = direction.normalized * speed;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-
     }
 }

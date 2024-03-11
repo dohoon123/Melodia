@@ -5,10 +5,8 @@ using UnityEngine;
 
 public abstract class Monster : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public MonsterDataSO monsterData;
     public Rigidbody2D targetRigidbody;
-    protected float detectRange = 5.0f;
-    protected float attackRange = 2.0f;
 
     protected float previousPositionX;
 
@@ -81,14 +79,14 @@ public abstract class Monster : MonoBehaviour
     }
 
     protected INode.ENodeState CheckEnemyWithinAttackRange() {
-        if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < attackRange * attackRange) {
+        if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < monsterData.attackRange * monsterData.attackRange) {
             return INode.ENodeState.ENS_Success;
         }
         return INode.ENodeState.ENS_Failure;
     }
 
     protected INode.ENodeState CheckEnemyWithinDetectRange() {
-        if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < detectRange * detectRange) {
+        if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - targetRigidbody.position) < monsterData.detectRange * monsterData.detectRange) {
             return INode.ENodeState.ENS_Success;
         }
         return INode.ENodeState.ENS_Failure;
@@ -97,12 +95,12 @@ public abstract class Monster : MonoBehaviour
     protected INode.ENodeState MoveToEnemy() {
         Vector2 currentPosition = transform.position;
 
-        if (Vector2.SqrMagnitude(currentPosition - targetRigidbody.position) < attackRange * attackRange) {
+        if (Vector2.SqrMagnitude(currentPosition - targetRigidbody.position) < monsterData.attackRange * monsterData.attackRange) {
             return INode.ENodeState.ENS_Success;
         }
 
         Vector2 dir = targetRigidbody.position - myRigidbody.position;
-        myRigidbody.velocity = moveSpeed * dir.normalized;
+        myRigidbody.velocity = monsterData.moveSpeed * dir.normalized;
 
         return INode.ENodeState.ENS_Running;
     }
@@ -117,17 +115,18 @@ public abstract class Monster : MonoBehaviour
         }
 
         Vector2 dir = originPosition - myRigidbody.position;
-        myRigidbody.velocity = moveSpeed * dir.normalized;
+        myRigidbody.velocity = monsterData.moveSpeed * dir.normalized;
 
         return INode.ENodeState.ENS_Running;
     }
 
+
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, detectRange);
+        Gizmos.DrawWireSphere(this.transform.position, monsterData.detectRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(this.transform.position, attackRange);
+        Gizmos.DrawWireSphere(this.transform.position, monsterData.attackRange);
     }
 
 }

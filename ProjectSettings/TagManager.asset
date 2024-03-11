@@ -14,9 +14,9 @@ TagManager:
   - Player
   - Floor
   - Wall
-  - Bullet
-  - 
-  - 
+  - Enemy
+  - EnemyBullet
+  - PlayerBullet
   - 
   - 
   - 
@@ -50,6 +50,6 @@ TagManager:
   - name: Player
     uniqueID: 3001836347
     locked: 0
-  - name: Bullet
-    uniqueID: 1599211755
+  - name: Monster
+    uniqueID: 3655307059
     locked: 0

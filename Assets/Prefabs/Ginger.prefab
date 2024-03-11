@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 4578571476181966639}
   - component: {fileID: 4578571476181966638}
   - component: {fileID: 4578571476181966637}
+  - component: {fileID: 2110924153647336358}
   m_Layer: 0
   m_Name: Ginger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,8 +92,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1293130949
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 391024709, guid: 61ddf874db869ae4fa69314b092020e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4578571476181966639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +190,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2630e3e51aa9b1f4788f9e933468b35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2110924153647336358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578571476181966034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee3a12b65191a649a7a44cdd035f316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 50
+  maxHp: 50

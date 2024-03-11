@@ -8,20 +8,26 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    enum PlayerState { EPS_Alive, EPS_Dead };
+
     Vector2 inputVec;
 
     float moveSpeed = 10.0f;
-
+    
     Rigidbody2D myRigidbody;
     SpriteRenderer mySpriter;
     Animator myAnimator;
     CapsuleCollider2D myCollider;
 
+    Health healthComponent;
+
     void Awake() {
         myRigidbody = GetComponent<Rigidbody2D>();
-        mySpriter= GetComponent<SpriteRenderer>();
+        mySpriter = GetComponent<SpriteRenderer>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider2D>();
+
+        healthComponent = GetComponent<Health>();
     }
 
     void Start() {

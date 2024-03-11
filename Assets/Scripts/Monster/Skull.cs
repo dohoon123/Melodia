@@ -10,19 +10,14 @@ public class Skull : Monster {
     private float evadeDuration;
 
     private void Start() {
-        detectRange = 10.0f;
-        attackRange = 5.0f;
-
         RuntimeAnimatorController ac = myAnimator.runtimeAnimatorController;
 
         foreach (AnimationClip clip in ac.animationClips) {
             if (clip.name == "Skull_Attack") {
-                Debug.Log(clip.length);
                 attackDuration = clip.length;
             }
             
             if (clip.name == "Skull_Evade") {
-                Debug.Log(clip.length);
                 evadeDuration = clip.length;
             }
         }
@@ -76,7 +71,6 @@ public class Skull : Monster {
     }
 
     INode.ENodeState DoRangeAttack() {
-        Debug.Log("do range attack");
         myAnimator.SetTrigger("attack");
 
         StartCoroutine(Attack());
