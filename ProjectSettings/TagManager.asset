@@ -17,7 +17,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - PlayerBullet
-  - 
+  - Weapon
   - 
   - 
   - 
@@ -47,9 +47,9 @@ TagManager:
   - name: Wall
     uniqueID: 327935881
     locked: 0
-  - name: Player
-    uniqueID: 3001836347
-    locked: 0
   - name: Monster
     uniqueID: 3655307059
+    locked: 0
+  - name: Player
+    uniqueID: 3001836347
     locked: 0

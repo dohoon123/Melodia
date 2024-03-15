@@ -20,7 +20,6 @@ public class HUD : MonoBehaviour
         {
             case InfoType.Health:
                 mySlider.value = playerHealth.GetCurrentHP();
-                Debug.Log(mySlider.value);
                 break;
             case InfoType.Level:
                 break;

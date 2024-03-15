@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4232789507884870753}
   - component: {fileID: 4232789507884870752}
   - component: {fileID: -3106195021888621960}
-  - component: {fileID: 4647640339366070096}
+  - component: {fileID: 1972817858}
   m_Layer: 9
   m_Name: Skull
   m_TagString: Untagged
@@ -133,8 +133,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -639660237
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 53d39a5227ad0504aa610dec0c5cd5b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterData: {fileID: 11400000, guid: 4ab351479fa52d84fbd1317a13c6a253, type: 2}
-  targetRigidbody: {fileID: 4578571476181966636, guid: fb395b27fdc7124409ee41d1a9eda728, type: 3}
---- !u!114 &4647640339366070096
+  targetRigidbody: {fileID: 0}
+--- !u!114 &1972817858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,5 +173,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee3a12b65191a649a7a44cdd035f316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 50
-  maxHp: 50
+  currentHP: 50
+  maxHP: 50
