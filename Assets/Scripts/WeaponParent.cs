@@ -8,6 +8,7 @@ public class WeaponParent : MonoBehaviour
 
     [SerializeField] SpriteRenderer weaponSpriteRenderer;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
+    [SerializeField] Animator animator;
 
     private void Update() {
         Vector2 direction = (pointerPosition - (Vector2)transform.position).normalized;
@@ -32,5 +33,9 @@ public class WeaponParent : MonoBehaviour
         }else {
             weaponSpriteRenderer.sortingOrder = playerSpriteRenderer.sortingOrder + 1;
         }
+    }
+
+    public void Attack() {
+        animator.SetTrigger("attack");
     }
 }

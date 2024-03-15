@@ -65,6 +65,10 @@ public class Player : MonoBehaviour
         inputVec = value.Get<Vector2>();
     }
 
+    void OnFire() {
+        weaponParent.Attack();
+    }
+
     void Move() {
         if (!IsPlayerMoving()) {
             myAnimator.SetBool("isMoving", false);
@@ -76,6 +80,8 @@ public class Player : MonoBehaviour
 
         myAnimator.SetBool("isMoving", true);
     }
+
+
 
     bool IsPlayerMoving() {
         bool isPlayerHasHorizontalSpeed = Mathf.Abs(inputVec.x) > Mathf.Epsilon;
