@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     
     void Update() {
         pointerInput = GetPointerInput();
-        weaponParent.pointerPosition = pointerInput;
+        //weaponParent.pointerPosition = pointerInput;
         Move();
     }
     
@@ -66,7 +66,9 @@ public class Player : MonoBehaviour
     }
 
     void OnFire() {
-        weaponParent.Attack();
+        if (weaponParent != null) {
+            weaponParent.Attack();
+        }
     }
 
     void Move() {
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
 
         Vector2 moveVector = inputVec * moveSpeed * Time.fixedDeltaTime;
         myRigidbody.MovePosition(myRigidbody.position + moveVector);
-
+        
         myAnimator.SetBool("isMoving", true);
     }
 
