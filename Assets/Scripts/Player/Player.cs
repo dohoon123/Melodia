@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     WeaponParent weaponParent;
     PlayerWeapon weapon;
 
+    PlaySheetComponent playSheetComponent;
 
     [SerializeField] InputActionReference pointerPosition;
 
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour
 
         weaponParent = GetComponentInChildren<WeaponParent>();
         weapon       = GetComponentInChildren<PlayerWeapon>();
+
+        playSheetComponent = GetComponent<PlaySheetComponent>();
     }
     
     void Update() {
@@ -69,6 +72,19 @@ public class Player : MonoBehaviour
         if (weaponParent != null) {
             weaponParent.Attack();
         }
+        Debug.Log("I did left click");
+    }
+
+    void OnRightClick() {
+        if (!playSheetComponent.IsPlayingSheet()) {
+            playSheetComponent.StartPlayingSheet();
+            return;
+        }
+        
+        if (playSheetComponent.IsPlayingSheet()) {
+            playSheetComponent.ContinuePlayingSheet();
+            return;
+        }
     }
 
     void Move() {
@@ -82,8 +98,6 @@ public class Player : MonoBehaviour
         
         myAnimator.SetBool("isMoving", true);
     }
-
-
 
     bool IsPlayerMoving() {
         bool isPlayerHasHorizontalSpeed = Mathf.Abs(inputVec.x) > Mathf.Epsilon;

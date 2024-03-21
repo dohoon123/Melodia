@@ -4,19 +4,17 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "SheetData", fileName = "New SheetData")]
 public class SheetDataSO : ScriptableObject {
-    
-
-    public int playSpeed = 1;
+    public float playSpeed = 0.5f;
     public Sheet sheet;
 }
 
 [Serializable]
-public class MelodyAndRhythm { 
+public class Note { 
     public int melody = 0;
     public int rhythm = 0;
 }
 
 [Serializable]
 public class Sheet {
-    public List<MelodyAndRhythm> notes;
+    public List<Note> notes;
 }
