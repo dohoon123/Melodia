@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4578571476181966638}
   - component: {fileID: 4578571476181966637}
   - component: {fileID: 2110924153647336358}
+  - component: {fileID: 1585298959}
   m_Layer: 6
   m_Name: Ginger
   m_TagString: Player
@@ -205,3 +206,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 50
   maxHP: 50
+--- !u!114 &1585298959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578571476181966034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb60d557b84b6c4c8011e2ef5be33fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sheets:
+  - {fileID: 11400000, guid: 18e4c806755cff74eaa2783d115659ff, type: 2}
+  - {fileID: 11400000, guid: 24d0ff386f7ac5b4aa9ef1149bf06d85, type: 2}
+  sheetPanel: {fileID: 0}
+  baseNoteSprite: {fileID: 21300000, guid: 91c02e2b22e596248b739bdc18067db3, type: 3}
+  targetNoteSprite: {fileID: 21300000, guid: d1b1439ee03c36742916cc6032df7a18, type: 3}
+  failureNoteSprite: {fileID: 21300000, guid: 04711b5e57aeb8d4188bcf96def48ea3, type: 3}
+  arrowPanel: {fileID: 0}
+  rhythmArrow: {fileID: 21300000, guid: 224cceca7697a394f9a1c3aa5c3e600e, type: 3}
+  emptyArrow: {fileID: 21300000, guid: 953e7f8f31f5f83499a7ac1124445a79, type: 3}
+  SF_Image: {fileID: 0}
+  successImage: {fileID: 21300000, guid: f9088e6a0d9d5ef468f377e691414cac, type: 3}
+  failureImage: {fileID: 21300000, guid: 99a1131e70e4dcd4487d03b06f1f4508, type: 3}

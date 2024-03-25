@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     Vector2 inputVec;
     Vector2 pointerInput;
 
+    // magazine
+
     float moveSpeed = 10.0f;
     
     Rigidbody2D myRigidbody;
@@ -71,8 +73,9 @@ public class Player : MonoBehaviour
     void OnFire() {
         if (weaponParent != null) {
             weaponParent.Attack();
+        }else{
+            playSheetComponent.UseCompleteSheet();
         }
-        Debug.Log("I did left click");
     }
 
     void OnRightClick() {

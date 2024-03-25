@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GenerationData
   m_EditorClassIdentifier: 
   minWidth: 32
-  maxWidth: 128
+  maxWidth: 144
   minHeight: 32
-  maxHeight: 128
+  maxHeight: 144
