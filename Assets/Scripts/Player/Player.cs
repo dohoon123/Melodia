@@ -74,7 +74,11 @@ public class Player : MonoBehaviour
         if (weaponParent != null) {
             weaponParent.Attack();
         }else{
-            playSheetComponent.UseCompleteSheet();
+            if(playSheetComponent.UseCompleteSheet()){
+                GameObject bullet = GameManager.instance.pool.Get(1);
+                TestBullet sb = bullet.GetComponent<TestBullet>();
+                sb.Set(transform.position, pointerInput);
+            }
         }
     }
 

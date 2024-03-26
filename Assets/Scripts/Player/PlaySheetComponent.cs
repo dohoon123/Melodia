@@ -155,7 +155,6 @@ public class PlaySheetComponent : MonoBehaviour
     void UpdateCompleteSheetUI() {
         Image[] CSImages;
         CSImages = completeSheetPanel.GetComponentsInChildren<Image>();
-        Debug.Log(CSImages.Count());
         for (int i = 0; i < completeSheetArray.Count(); i++) {
             if (completeSheetArray[i] == 1) {
                 CSImages[i].sprite = completeSheetSprite;
@@ -173,11 +172,15 @@ public class PlaySheetComponent : MonoBehaviour
         return completeSheetNumber;
     }
 
-    public void UseCompleteSheet() {
+    public bool UseCompleteSheet() {
         if (completeSheetNumber > 0) {
             completeSheetArray[completeSheetNumber - 1] = 0;
             completeSheetNumber--;
+
+            UpdateCompleteSheetUI();
+            return true;
         }
-        UpdateCompleteSheetUI();
+        
+        return false;
     }
 }
