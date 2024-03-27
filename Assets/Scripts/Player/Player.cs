@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     Vector2 inputVec;
     Vector2 pointerInput;
 
-    // magazine
-
     float moveSpeed = 10.0f;
     
     Rigidbody2D myRigidbody;

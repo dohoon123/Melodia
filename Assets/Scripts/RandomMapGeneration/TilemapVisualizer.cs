@@ -14,13 +14,12 @@ public class TilemapVisualizer : MonoBehaviour
         wallInnerCornerDownLeft, wallInnerCornerDownRight, 
         wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft;
 
-    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions){
+    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions) {
         PaintTiles(floorPositions, floorTilemap, floorTile);
         floorTilemap.RefreshAllTiles();
     }
 
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
-    {
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile) {
         foreach (var position in positions) {
             PaintSingleTile(tilemap, tile, position);
         }

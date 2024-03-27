@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GenerationData", menuName = "GenerationData")]
 public class GenerationDataSO : ScriptableObject
 {
-    public int minWidth = 16;
-    public int maxWidth = 128;
+    public int minWidth = 2;
+    public int maxWidth = 12;
 
-    public int minHeight = 16;
-    public int maxHeight = 128;
+    public int minHeight = 2;
+    public int maxHeight = 12;
 }

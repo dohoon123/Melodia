@@ -8,8 +8,7 @@ using Random = UnityEngine.Random;
 
 public class RandomDungeonGenerator : AbstractDungeonGenerator
 {
-    [SerializeField]
-    RoomCreator roomCreator;
+    [SerializeField] RoomCreator roomCreator;
 
     protected override IEnumerator RunProceduralGeneration(){
 
@@ -18,9 +17,9 @@ public class RandomDungeonGenerator : AbstractDungeonGenerator
         while (!roomCreator.isProcessFinished) {
             yield return null;
         }
-        HashSet<Vector2Int> floorPositions = roomCreator.GetTileCoordinates();
-        Debug.Log(floorPositions.Count);
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
-        WallGenerator.CreatWalls(floorPositions, tilemapVisualizer);
+        HashSet<Vector2Int> floorTilePositions = roomCreator.GetFloorTileCoordinates();
+        HashSet<Vector2Int> corridorTilePositions = roomCreator.GetCorridorTileCoordinates();
+        tilemapVisualizer.PaintFloorTiles(floorTilePositions);
+        WallGenerator.CreatWalls(floorTilePositions, tilemapVisualizer);
     }
 }
